@@ -15,7 +15,7 @@
 
 <p align="center">
   <a href="https://drums.run">Website</a> ·
-  <a href="https://console.drums.run/docs">Docs</a> ·
+  <a href="https://docs.drums.run">Docs</a> ·
   <a href="https://bench.drums.run">Benchmarks</a> ·
   <a href="https://console.drums.run">Console</a> ·
   <a href="https://pypi.org/project/drums-sdk/">PyPI</a>
@@ -59,7 +59,7 @@ with drums.connect() as client:
 ```
 
 Agent frameworks that speak MCP get the same desktops from `drums mcp`; see the
-[MCP guide](https://console.drums.run/docs/guides/mcp).
+[MCP guide](https://docs.drums.run/guides/mcp).
 
 Self-hosted: the [drumsd install guide](https://github.com/Drums-Labs/drumsd/blob/main/docs/install.md) takes a fresh
 Ubuntu 24.04 host to a running Drums server.
