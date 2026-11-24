@@ -32,15 +32,14 @@ clean start, and reports a verified reward at the end of a rollout.
 
 What we have measured so far, on our own AWS hosts (self-measured, not independently replicated):
 
-- **512 concurrent desktops sustained on one server** (r8i.16xlarge, 64 vCPU, 512 GiB, scripted policy), on three
-  hosts across three studies, never on both hosts of one study. Load doubles at each step, so 512 is the last step that
-  held (at least 95% of rollouts valid). A fourth host stopped at 128, and on a fifth the run ended early on a failed
-  create.
-- **Clean reset: median 0.96 s** at 32 concurrent desktops (scripted policy, 55 OSWorld tasks). On one idle
-  desktop the median is 0.56 s; at 256 concurrent desktops it rises to 12.6 s.
-- **Warm fork into 4 copies: median 0.08 to 0.27 s** across runs on four hosts (first study 0.139 s); no invalid
-  copies in any run after a crash-attribution fix, and 3 of 240 forks ran cold (about 2.7 to 2.8 s). A cold fork of a
-  desktop with Chrome and LibreOffice Calc open takes about 2.3 s.
+- **512 concurrent desktops sustained on one server** (r8i.16xlarge, 64 vCPU, 512 GiB, scripted policy), on five
+  hosts across four studies, including two fresh hosts installed from the public release on 2026-11-22, where tuned
+  KVM on the same hosts held 128. Load doubles at each step, so 512 is the last step tested (at least 95% of
+  rollouts valid).
+- **Clean reset: median 0.54 s** at 32 concurrent desktops (drumsd v0.2.1, two fresh hosts, 2026-11-22, scripted
+  policy, 55 OSWorld tasks).
+- **Warm fork into 4 copies: median under 0.3 s in every run, as low as 0.08 s**, with no invalid copies after a
+  crash-attribution fix. A cold fork of a desktop with Chrome and LibreOffice Calc open takes about 2.3 s.
 
 ## Repositories
 
