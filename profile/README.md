@@ -10,7 +10,7 @@
 <h1 align="center">Drums</h1>
 
 <p align="center">
-  Infrastructure for computer-use RL: hundreds of isolated desktops per server, each one forkable, resettable and verifiable.
+  Infrastructure for computer-use RL: many isolated desktops on one Linux server, each one forkable, resettable and verifiable.
 </p>
 
 <p align="center">
@@ -18,15 +18,28 @@
   <a href="https://docs.drums.run">Docs</a> ·
   <a href="https://bench.drums.run">Benchmarks</a> ·
   <a href="https://console.drums.run">Console</a> ·
-  <a href="https://pypi.org/project/drums-sdk/">PyPI</a>
+  <a href="https://pypi.org/project/drums-sdk/">PyPI</a> ·
+  <a href="https://x.com/drumslabs">X</a> ·
+  <a href="https://www.linkedin.com/company/drums-labs">LinkedIn</a>
 </p>
 
 ## What Drums is
 
 Training a computer-use agent means running the same desktop task thousands of times. Drums runs many isolated
 desktops on one Linux host by sharing one running operating system and its applications while keeping each desktop's
-mutable state separate. A desktop restores from a template in seconds, forks at any point, resets in well under a
-second, and reports a verified reward at the end of a rollout.
+mutable state separate. A desktop restores from a checkpoint, forks into copies of its running state, resets to a
+clean start, and reports a verified reward at the end of a rollout.
+
+What we have measured so far, on our own AWS hosts (self-measured, not independently replicated):
+
+- **512 concurrent desktops sustained on one server** (r8i.16xlarge, 64 vCPU, 512 GiB, scripted policy), on five
+  hosts across four studies, including two fresh hosts installed from the public release on 2026-11-22, where tuned
+  KVM on the same hosts held 128. Load doubles at each step, so 512 is the last step tested (at least 95% of
+  rollouts valid).
+- **Clean reset: median 0.54 s** at 32 concurrent desktops (drumsd v0.2.1, two fresh hosts, 2026-11-22, scripted
+  policy, 55 OSWorld tasks).
+- **Warm fork into 4 copies: median under 0.3 s in every run, as low as 0.08 s**, with no invalid copies after a
+  crash-attribution fix. A cold fork of a desktop with Chrome and LibreOffice Calc open takes about 2.3 s.
 
 ## Repositories
 
@@ -39,7 +52,9 @@ second, and reports a verified reward at the end of a rollout.
 
 ## Start here
 
-Hosted, no server needed. Create an API key at [console.drums.run](https://console.drums.run), then:
+Hosted, no server needed. Drums Cloud is open to invited teams until January 2027
+([request access](https://console.drums.run/request-access)). With an invite, create an API key at
+[console.drums.run](https://console.drums.run), then:
 
 ```bash
 pip install drums-sdk
